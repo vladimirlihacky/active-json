@@ -58,11 +58,3 @@ export class Model implements BaseModel {
         return instance;
     }
 }
-
-export class User extends Model {
-    name: string = "user"; 
-    posts: number[] = [];
-    // ...
-}
-
-const user = await User.findOne((u) => u.id === 1);
