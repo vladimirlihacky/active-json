@@ -4,7 +4,7 @@ import type { BaseModel, CreateData, DataSource, Matcher, Maybe, Updater } from 
 export class Model implements BaseModel {
     private static dataSource: DataSource;
 
-    public static setRepo(dataSource: DataSource) {
+    public static setDataSource(dataSource: DataSource) {
         Model.dataSource = dataSource;
     }
 
@@ -20,7 +20,7 @@ export class Model implements BaseModel {
         return Model.dataSource.updateOne(this, matching, update);
     }
 
-    public static update<T extends Model>(this: new () => T, matching: Matcher<T>, update: Updater<T>): Promise<T[]> {
+    public static update<T extends Model>(this: new () => T, matching: Matcher<T>, update: Updater<Omit<T, "serialize">>): Promise<T[]> {
         return Model.dataSource.update(this, matching, update);
     }
 

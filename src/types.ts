@@ -17,7 +17,8 @@ export interface DataSource {
     createOne<T extends BaseModel>(entity: new () => T, data: CreateData<T>): Promise<Maybe<T>>;
     deleteOne<T extends BaseModel>(entity: new () => T, matching: Matcher<T>): Promise<Maybe<T>>;
     find<T extends BaseModel>(entity: new () => T, matching: Matcher<T>): Promise<T[]>;
-    update<T extends BaseModel>(entity: new () => T, matching: Matcher<T>, update: Updater<T>): Promise<T[]>;
+    updateOne<T extends BaseModel>(entity: new () => T, matching: Matcher<T>, update: Updater<Omit<T, "serialize">>): Promise<T>;
+    update<T extends BaseModel>(entity: new () => T, matching: Matcher<T>, update: Updater<Omit<T, "serialize">>): Promise<T[]>;
     create<T extends BaseModel>(entity: new () => T, data: CreateData<T>[]): Promise<T[]>;
     delete<T extends BaseModel>(entity: new () => T, matching: Matcher<T>): Promise<T[]>;
 }
